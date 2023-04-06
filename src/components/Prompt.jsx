@@ -1,19 +1,46 @@
+import { useRef, useEffect } from "react"
+
 export function Prompt() {
+    const textAreaRef = useRef()
+
+    async function handleSubmit(event) {
+        event.preventDefault()
+
+        //Get formData
+        const formData = new FormData(event.target)
+        const prompt = formData.get('prompt')
+
+        const response = await fetch(`/api/generate?prompt=${prompt}&language=javascript&framework=react`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+
+        })
+        if (!response.ok) console.log("ERROR")
+
+        console.log(response)
+
+    }
+    useEffect(() => {
+        textAreaRef.current.focus()
+    })
+
     return (
         <div>
-            <label
-                for="UserEmail"
-                class="block text-xs font-medium text-gray-700 dark:text-gray-200"
-            >
-                Prompt
-            </label>
+            <form onSubmit={handleSubmit}>
+                <textarea
+                    ref={textAreaRef}
+                    rows={1}
+                    name='prompt'
+                    type="text"
+                    id="UserEmail"
+                    placeholder=""
+                    className='block w-full text-xl px-4 py-2 border border-gray-600 rounded-lg bg-zinc-900/50 text-white sm:text-sm h-[48px]'
+                />
+                <button className="">Enviar</button>
+            </form>
 
-            <textarea
-                type="email"
-                id="UserEmail"
-                placeholder=""
-                class="mt-1 w-full rounded-md border-gray-200 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white sm:text-sm"
-            />
         </div>
 
     )

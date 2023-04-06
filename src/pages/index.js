@@ -16,8 +16,8 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <main className='bg-black min-h-screen w-screen'>
-                <Blobs />
+            <main className='px-10 py-10 bg-black min-h-screen w-screen'>
+                {/*<Blobs />*/}
                 <h1 className='bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600
                 text-6xl font-bold text-transparent bg-clip-text'>
                     Genera componentes con IA
