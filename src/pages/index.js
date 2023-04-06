@@ -1,13 +1,11 @@
 import Head from 'next/head'
 import { Prompt } from '@/components/Prompt'
 import { Blobs } from '@/components/Blobs'
-//import Image from 'next/image'
-//import { Inter } from 'next/font/google'
-//import styles from '@/styles/Home.module.css'
+import { useConversationsStore } from "@/stores/conversations"
 
-//const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+    const response = useConversationsStore(state => state.response)
     return (
         <>
             <Head>
@@ -18,6 +16,7 @@ export default function Home() {
             </Head>
             <main className='px-10 py-10 bg-black min-h-screen w-screen'>
                 {/*<Blobs />*/}
+
                 <h1 className='bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600
                 text-6xl font-bold text-transparent bg-clip-text'>
                     Genera componentes con IA
@@ -26,6 +25,10 @@ export default function Home() {
                     <div className='w-full'>
                         <Prompt />
                     </div>
+                </div>
+                <div>
+                    {response}
+
                 </div>
             </main>
         </>

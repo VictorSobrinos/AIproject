@@ -1,7 +1,9 @@
 import { useRef, useEffect } from "react"
+import { useConversationsStore } from "@/stores/conversations"
 
 export function Prompt() {
     const textAreaRef = useRef()
+    const generateComponent = useConversationsStore(state => state.generateComponent)
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -9,17 +11,11 @@ export function Prompt() {
         //Get formData
         const formData = new FormData(event.target)
         const prompt = formData.get('prompt')
+        const language = formData.get('language')
+        const framework = formData.get('framework')
 
-        const response = await fetch(`/api/generate?prompt=${prompt}&language=javascript&framework=react`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        generateComponent({ prompt })
 
-        })
-        if (!response.ok) console.log("ERROR")
-
-        console.log(response)
 
     }
     useEffect(() => {
