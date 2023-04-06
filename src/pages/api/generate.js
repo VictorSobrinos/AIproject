@@ -35,11 +35,11 @@ export default async function handler(req, res) {
             stream: false
         })
     })
-    console.log(response.ok)
     if (!response.ok) return res.status(500).json({ error: "Something went wrong" })
 
-    const data = await response.json()
-    console.log(data)
+    const { uasage, choices } = await response.json()
+    const data = choices?.[0]?.message
+    console.log({ data })
 
     return res.status(200).json({ data })
 }
